@@ -1,0 +1,25 @@
+@import "variables";
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: $color--bg-dark;
+  color: $color--font;
+  font-family: $changa;
+}
+
+#header {
+  div {
+    width: 90%;
+    margin: auto auto;
+  }
+
+  h1 {
+    display: block;
+
+    padding: 0;
+    margin: 0;
+  }
+}
