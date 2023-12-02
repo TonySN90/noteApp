@@ -1,29 +1,51 @@
 #createNoteField {
-  //   display: none;
   position: absolute;
+  z-index: 1;
   top: 0;
   right: 0;
 
+  //   display: none;
+  overflow-x: hidden;
   width: 80%;
   height: 100vh;
   border-left: 3px solid $color--primary;
 
   background-color: $color--bg-middle;
-  z-index: 1;
-  overflow-x: hidden;
 
-  #input__title {
+  @mixin input-field-styles {
     display: block;
-    height: 10%;
     width: 90%;
-
     margin: 1rem auto;
-    padding-left: 1rem;
     border: none;
     border-radius: $border-radius;
-
-    font-size: 2rem;
+    font-size: 1rem;
     background-color: $color--bg-dark;
     color: $color--font;
+  }
+
+  #input__title {
+    @include input-field-styles;
+    height: 10%;
+    padding-left: 1rem;
+  }
+
+  textarea {
+    @include input-field-styles;
+    height: 74%;
+    padding: 1rem;
+  }
+
+  .button__area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 90%;
+    height: 10%;
+    margin: auto;
+
+    button {
+      width: 6rem;
+    }
   }
 }
