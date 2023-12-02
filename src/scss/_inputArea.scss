@@ -1,16 +1,16 @@
-#createNoteField {
+#inputField {
   position: absolute;
   z-index: 1;
   top: 0;
   right: 0;
 
-  //   display: none;
   overflow-x: hidden;
   width: 0%;
   height: 100vh;
-  border-left: 3px solid $color--primary;
+  border-left: 5px solid $color--primary;
 
   background-color: $color--bg-middle;
+  transition: all 0.6s ease-in-out;
 
   @mixin input-field-styles {
     display: block;
@@ -31,9 +31,12 @@
 
   textarea {
     @include input-field-styles;
-    height: 74%;
+    height: 72%;
     padding: 1rem;
     font-size: 1rem;
+
+    white-space: pre;
+    overflow-x: hidden;
   }
 
   .button__area {
