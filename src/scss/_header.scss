@@ -1,15 +1,39 @@
 #header {
-  div {
+  .header__container {
+    display: flex;
+    justify-content: space-between;
+
     width: 90%;
+    height: 4rem;
     margin: auto auto;
-  }
 
-  h1 {
-    display: block;
+    h1 {
+      display: block;
 
-    padding: 0;
-    margin: 0;
+      padding: 0;
+      margin: 0;
 
-    font-size: 1.8rem;
+      font-size: 2rem;
+    }
+
+    // button {
+    //   width: 2.5rem;
+    //   height: 2.5rem;
+
+    //   border: none;
+    //   border-radius: 2rem;
+    //   background-color: $color--primary;
+    // }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .icon {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
   }
 }

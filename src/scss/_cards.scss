@@ -12,13 +12,18 @@
     width: 100%;
     height: 6rem;
 
-    border-radius: 0.3rem;
+    border-bottom-right-radius: $border-radius;
+    border-top-right-radius: $border-radius;
     background-color: $color--bg-middle;
 
     .cards__wrapper-colorstrip {
       width: 7px;
       height: 100%;
-      background-color: red;
+
+      border-bottom-left-radius: $border-radius;
+      border-top-left-radius: $border-radius;
+
+      background-color: #eb4d4b;
     }
 
     .cards__wrapper-contentarea {

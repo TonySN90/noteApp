@@ -1,0 +1,29 @@
+#createNoteField {
+  //   display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 80%;
+  height: 100vh;
+  border-left: 3px solid $color--primary;
+
+  background-color: $color--bg-middle;
+  z-index: 1;
+  overflow-x: hidden;
+
+  #input__title {
+    display: block;
+    height: 10%;
+    width: 90%;
+
+    margin: 1rem auto;
+    padding-left: 1rem;
+    border: none;
+    border-radius: $border-radius;
+
+    font-size: 2rem;
+    background-color: $color--bg-dark;
+    color: $color--font;
+  }
+}

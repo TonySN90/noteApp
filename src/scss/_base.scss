@@ -4,12 +4,15 @@
 $changa: "Changa", sans-serif;
 
 // colors
-$color--primary: red;
+$color--primary: #eb4d4b;
 $color--secondary: blue;
 
 $color--bg-dark: #222222;
 $color--bg-middle: #2c2c2c;
 $color--font: #e8e8e8;
+
+// border
+$border-radius: 0.3rem;
 
 body {
   margin: 0;
@@ -18,4 +21,17 @@ body {
   background-color: $color--bg-dark;
   color: $color--font;
   font-family: $changa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.button {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border: none;
+  border-radius: 2rem;
+  background-color: $color--primary;
 }
