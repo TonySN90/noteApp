@@ -3,10 +3,14 @@
 import "./../scss/main.scss";
 import * as view from "./view.js";
 
-const openInputFieldBtn = document.querySelector(".button__open");
+const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
 
 const state = {};
 
-openInputFieldBtn.addEventListener("click", view.displayInputField);
-storeBtn.addEventListener("click", view.closeInputField);
+openBtn.addEventListener("click", view.displayInputField);
+storeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  view.buildHtmlMarkup();
+  view.closeInputField();
+});
