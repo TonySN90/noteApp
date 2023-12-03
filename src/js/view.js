@@ -40,7 +40,7 @@ export const buildHtmlMarkup = function (note) {
 
   const timeStampEl = document.createElement("div");
   timeStampEl.setAttribute("class", "card__contentarea-timestamp");
-  timeStampEl.innerHTML = "SA: 03.12.2023 - 00:10";
+  timeStampEl.innerHTML = note.timeStamp;
 
   containerEl.insertAdjacentElement("afterbegin", wrapperEl);
   wrapperEl.insertAdjacentElement("afterbegin", colorStripEl);

@@ -9,11 +9,20 @@ const storeBtn = document.querySelector(".button__store");
 const state = {
   clicked: false,
   checked: false,
-  // currentNote: {
-  //   noteTitle: "",
-  //   noteContent: "",
-  // },
-  notesList: [],
+  notesList: [
+    {
+      title: "Test Titel",
+      content: "Test Inhalt",
+      timeStamp: "gestern",
+      id: Math.trunc(Math.random() * 100) + 1,
+    },
+    {
+      title: "Test Titel2",
+      content: "Test Inhalt2",
+      timeStamp: "heute",
+      id: Math.trunc(Math.random() * 100) + 1,
+    },
+  ],
 };
 
 const checkInput = function () {
@@ -45,6 +54,18 @@ const pushNoteToList = function (note) {
   state.notesList.push(note);
 };
 
+const displayNotesList = function () {
+  state.notesList.forEach((note) => {
+    view.buildHtmlMarkup(note);
+  });
+};
+
+const init = function () {
+  displayNotesList();
+};
+
+init();
+
 // Eventlistener --
 openBtn.addEventListener("click", view.displayInputField);
 
@@ -62,7 +83,6 @@ storeBtn.addEventListener("click", (e) => {
     view.clearInputs();
 
     state.checked = false;
-    console.log(state);
   }
 });
 
