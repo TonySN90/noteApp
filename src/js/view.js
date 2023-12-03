@@ -12,6 +12,11 @@ export const getInput = function () {
   inputContent = document.querySelector("#input__content").value;
 };
 
+export const clearInputs = function () {
+  document.querySelector("#input__title").value = "";
+  document.querySelector("#input__content").value = "";
+};
+
 export const buildHtmlMarkup = function (title, content, timeStamp) {
   const containerEl = document.createElement("div");
   containerEl.setAttribute("class", "card__container");

@@ -1,7 +1,5 @@
 .card__container {
   width: 90%;
-  // height: 5rem;
-
   margin: 0 auto 0.5rem auto;
 
   cursor: pointer;
@@ -15,6 +13,7 @@
     border-bottom-right-radius: $border-radius;
     border-top-right-radius: $border-radius;
     background-color: $color--bg-middle;
+    backdrop-filter: brightness(0%);
 
     .card__wrapper-colorstrip {
       width: 7px;
@@ -23,7 +22,7 @@
       border-bottom-left-radius: $border-radius;
       border-top-left-radius: $border-radius;
 
-      background-color: #eb4d4b;
+      background-color: $color--primary;
     }
 
     .card__wrapper-contentarea {

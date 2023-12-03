@@ -28,6 +28,15 @@ const validateInput = function () {
   }
 };
 
+const setCardToActive = function (card) {
+  const cards = document.querySelectorAll(".card__container");
+  cards.forEach((card) => card.classList.remove("active"));
+  // cardEl.classList.remove("active");
+
+  console.log(card);
+  card.classList.add("active");
+};
+
 // Eventlistener --
 
 openBtn.addEventListener("click", view.displayInputField);
@@ -44,4 +53,20 @@ storeBtn.addEventListener("click", (e) => {
     );
     view.closeInputField();
   }
+  view.clearInputs();
+  state.validated = false;
+});
+
+document.querySelector("#cards").addEventListener("click", (e) => {
+  const card = e.target.closest(".card__container");
+  if (!card) return;
+
+  setCardToActive(card);
+
+  const cardTitle = card.querySelector(".card__contentarea-title").textContent;
+  const cardContent = card.querySelector(
+    ".card__contentarea-content"
+  ).textContent;
+
+  console.log(cardTitle, cardContent);
 });
