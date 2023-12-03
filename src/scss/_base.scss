@@ -9,6 +9,7 @@ $color--secondary: blue;
 
 $color--bg-dark: #222222;
 $color--bg-middle: #2c2c2c;
+$color--bg-active: #4c4c4c;
 $color--font: #e8e8e8;
 
 // border
@@ -41,6 +42,6 @@ body {
   cursor: pointer;
 }
 
-.active {
-  backdrop-filter: blur(0.8);
-}
+// .active {
+//   background-color: blue;
+// }

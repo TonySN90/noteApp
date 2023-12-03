@@ -13,7 +13,6 @@
     border-bottom-right-radius: $border-radius;
     border-top-right-radius: $border-radius;
     background-color: $color--bg-middle;
-    backdrop-filter: brightness(0%);
 
     .card__wrapper-colorstrip {
       width: 7px;
@@ -33,5 +32,10 @@
         font-size: 1.1rem;
       }
     }
+  }
+
+  .active {
+    background-color: $color--bg-active;
+    // verändern
   }
 }

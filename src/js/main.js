@@ -8,65 +8,66 @@ const storeBtn = document.querySelector(".button__store");
 
 const state = {
   clicked: false,
-  validated: false,
-  currentNote: {
-    noteTitle: "",
-    noteContent: "",
-  },
-  allNotes: {},
+  checked: false,
+  // currentNote: {
+  //   noteTitle: "",
+  //   noteContent: "",
+  // },
+  notesList: [],
 };
 
-const validateInput = function () {
+const checkInput = function () {
   if (view.inputTitle === "") {
     console.log("trage Titel ein");
   } else if (view.inputContent === "") {
     console.log("trage Content ein");
   } else {
-    state.currentNote.noteTitle = view.inputTitle;
-    state.currentNote.noteContent = view.inputContent;
-    state.validated = true;
+    state.checked = true;
   }
 };
 
-const setCardToActive = function (card) {
-  const cards = document.querySelectorAll(".card__container");
-  cards.forEach((card) => card.classList.remove("active"));
-  // cardEl.classList.remove("active");
+const setCardActive = function (card) {
+  view.changeBackgroundColor(card);
+  view.displayInputField();
+  // view.fillInputs();
+};
 
-  console.log(card);
-  card.classList.add("active");
+const createNote = function () {
+  return {
+    title: view.inputTitle,
+    content: view.inputContent,
+    timeStamp: "Heute",
+    id: Math.trunc(Math.random() * 100) + 1,
+  };
+};
+
+const pushNoteToList = function (note) {
+  state.notesList.push(note);
 };
 
 // Eventlistener --
-
 openBtn.addEventListener("click", view.displayInputField);
 
 storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   view.getInput();
-  validateInput();
-  if (state.validated) {
-    view.buildHtmlMarkup(
-      state.currentNote.noteTitle,
-      state.currentNote.noteContent
-    );
+  checkInput();
+  if (state.checked) {
+    const note = createNote();
+
+    view.buildHtmlMarkup(note);
+    pushNoteToList(note);
     view.closeInputField();
+    view.clearInputs();
+
+    state.checked = false;
+    console.log(state);
   }
-  view.clearInputs();
-  state.validated = false;
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
-  const card = e.target.closest(".card__container");
+  const card = e.target.closest(".card__wrapper");
   if (!card) return;
-
-  setCardToActive(card);
-
-  const cardTitle = card.querySelector(".card__contentarea-title").textContent;
-  const cardContent = card.querySelector(
-    ".card__contentarea-content"
-  ).textContent;
-
-  console.log(cardTitle, cardContent);
+  setCardActive(card);
 });

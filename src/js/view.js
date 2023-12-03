@@ -17,7 +17,7 @@ export const clearInputs = function () {
   document.querySelector("#input__content").value = "";
 };
 
-export const buildHtmlMarkup = function (title, content, timeStamp) {
+export const buildHtmlMarkup = function (note) {
   const containerEl = document.createElement("div");
   containerEl.setAttribute("class", "card__container");
 
@@ -32,11 +32,11 @@ export const buildHtmlMarkup = function (title, content, timeStamp) {
 
   const titleEl = document.createElement("h2");
   titleEl.setAttribute("class", "card__contentarea-title");
-  titleEl.innerHTML = title;
+  titleEl.innerHTML = note.title;
 
   const contentEl = document.createElement("div");
   contentEl.setAttribute("class", "card__contentarea-content");
-  contentEl.innerHTML = content;
+  contentEl.innerHTML = note.content;
 
   const timeStampEl = document.createElement("div");
   timeStampEl.setAttribute("class", "card__contentarea-timestamp");
@@ -59,3 +59,13 @@ export const displayInputField = function () {
 export const closeInputField = function () {
   inputField.style.width = "0%";
 };
+
+export const changeBackgroundColor = function (card) {
+  const cards = document.querySelectorAll(".card__wrapper");
+  cards.forEach((cards) => cards.classList.remove("active"));
+  card.classList.add("active");
+};
+
+// export const fillInputs = function() {
+
+// }
