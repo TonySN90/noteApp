@@ -3,39 +3,48 @@
 const inputField = document.querySelector("#inputField");
 const cards = document.querySelector("#cards");
 
-export const buildHtmlMarkup = function () {
-  const container = document.createElement("div");
-  container.setAttribute("class", "card__container");
+// Export Data
+export let inputTitle = "";
+export let inputContent = "";
 
-  const wrapper = document.createElement("div");
-  wrapper.setAttribute("class", "card__wrapper");
+export const getInput = function () {
+  inputTitle = document.querySelector("#input__title").value;
+  inputContent = document.querySelector("#input__content").value;
+};
 
-  const colorStrip = document.createElement("div");
-  colorStrip.setAttribute("class", "card__wrapper-colorstrip");
+export const buildHtmlMarkup = function (title, content, timeStamp) {
+  const containerEl = document.createElement("div");
+  containerEl.setAttribute("class", "card__container");
 
-  const contentArea = document.createElement("div");
-  contentArea.setAttribute("class", "card__wrapper-contentarea");
+  const wrapperEl = document.createElement("div");
+  wrapperEl.setAttribute("class", "card__wrapper");
 
-  const title = document.createElement("h2");
-  title.setAttribute("class", "card__contentarea-title");
-  title.innerHTML = "Das ist eine Test-Titel, erstellt aus JS!";
+  const colorStripEl = document.createElement("div");
+  colorStripEl.setAttribute("class", "card__wrapper-colorstrip");
 
-  const content = document.createElement("div");
-  content.setAttribute("class", "card__contentarea-content");
-  content.innerHTML = "Das ist ein Test-Inhalt, erstellt aus JS!";
+  const contentAreaEl = document.createElement("div");
+  contentAreaEl.setAttribute("class", "card__wrapper-contentarea");
 
-  const timeStamp = document.createElement("div");
-  timeStamp.setAttribute("class", "card__contentarea-timestamp");
-  timeStamp.innerHTML = "SA: 03.12.2023 - 00:10";
+  const titleEl = document.createElement("h2");
+  titleEl.setAttribute("class", "card__contentarea-title");
+  titleEl.innerHTML = title;
 
-  container.insertAdjacentElement("afterbegin", wrapper);
-  wrapper.insertAdjacentElement("afterbegin", colorStrip);
-  wrapper.insertAdjacentElement("beforeend", contentArea);
-  contentArea.insertAdjacentElement("beforeend", title);
-  contentArea.insertAdjacentElement("beforeend", content);
-  contentArea.insertAdjacentElement("beforeend", timeStamp);
+  const contentEl = document.createElement("div");
+  contentEl.setAttribute("class", "card__contentarea-content");
+  contentEl.innerHTML = content;
 
-  cards.insertAdjacentElement("afterbegin", container);
+  const timeStampEl = document.createElement("div");
+  timeStampEl.setAttribute("class", "card__contentarea-timestamp");
+  timeStampEl.innerHTML = "SA: 03.12.2023 - 00:10";
+
+  containerEl.insertAdjacentElement("afterbegin", wrapperEl);
+  wrapperEl.insertAdjacentElement("afterbegin", colorStripEl);
+  wrapperEl.insertAdjacentElement("beforeend", contentAreaEl);
+  contentAreaEl.insertAdjacentElement("beforeend", titleEl);
+  contentAreaEl.insertAdjacentElement("beforeend", contentEl);
+  contentAreaEl.insertAdjacentElement("beforeend", timeStampEl);
+
+  cards.insertAdjacentElement("afterbegin", containerEl);
 };
 
 export const displayInputField = function () {
