@@ -7,23 +7,24 @@ const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
 
 const state = {
-  clicked: false,
+  active: false,
   checked: false,
-  notesList: [
-    {
-      title: "Test Titel",
-      content: "Test Inhalt",
-      timeStamp: "gestern",
-      id: Math.trunc(Math.random() * 100) + 1,
-    },
-    {
-      title: "Test Titel2",
-      content: "Test Inhalt2",
-      timeStamp: "heute",
-      id: Math.trunc(Math.random() * 100) + 1,
-    },
-  ],
 };
+
+const notesList = [
+  {
+    title: "Test Titel",
+    content: "Test Inhalt",
+    timeStamp: "gestern",
+    id: Math.trunc(Math.random() * 100) + 1,
+  },
+  {
+    title: "Test Titel2",
+    content: "Test Inhalt2",
+    timeStamp: "heute",
+    id: Math.trunc(Math.random() * 100) + 1,
+  },
+];
 
 const checkInput = function () {
   if (view.inputTitle === "") {
@@ -36,9 +37,9 @@ const checkInput = function () {
 };
 
 const setCardActive = function (card) {
-  view.changeBackgroundColor(card);
+  const wrapper = card.querySelector(".card__wrapper");
+  view.changeBackgroundColor(wrapper);
   view.displayInputField();
-  // view.fillInputs();
 };
 
 const createNote = function () {
@@ -51,13 +52,28 @@ const createNote = function () {
 };
 
 const pushNoteToList = function (note) {
-  state.notesList.push(note);
+  notesList.push(note);
 };
 
 const displayNotesList = function () {
-  state.notesList.forEach((note) => {
+  notesList.forEach((note) => {
     view.buildHtmlMarkup(note);
   });
+};
+
+const findNote = function (noteElID) {
+  return notesList.find((note) => note.id == noteElID);
+};
+
+const createNewEntry = function (e) {
+  const note = createNote();
+  pushNoteToList(note);
+
+  view.buildHtmlMarkup(note);
+  view.closeInputField();
+  view.clearInputs();
+
+  state.checked = false;
 };
 
 const init = function () {
@@ -74,20 +90,23 @@ storeBtn.addEventListener("click", (e) => {
 
   view.getInput();
   checkInput();
-  if (state.checked) {
-    const note = createNote();
 
-    view.buildHtmlMarkup(note);
-    pushNoteToList(note);
-    view.closeInputField();
-    view.clearInputs();
-
-    state.checked = false;
+  if (state.checked && state.active) {
+    // Hier weiter machen Dulli!!!
+  } else if (state.checked) {
+    createNewEntry(e);
   }
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
-  const card = e.target.closest(".card__wrapper");
-  if (!card) return;
-  setCardActive(card);
+  const noteEl = e.target.closest(".card__container");
+  if (!noteEl) return;
+
+  state.active = true;
+  setCardActive(noteEl);
+
+  const noteElID = noteEl.dataset.id;
+  const currentNote = findNote(noteElID);
+
+  view.fillInputs(currentNote);
 });

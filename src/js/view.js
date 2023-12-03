@@ -20,6 +20,7 @@ export const clearInputs = function () {
 export const buildHtmlMarkup = function (note) {
   const containerEl = document.createElement("div");
   containerEl.setAttribute("class", "card__container");
+  containerEl.dataset.id = note.id;
 
   const wrapperEl = document.createElement("div");
   wrapperEl.setAttribute("class", "card__wrapper");
@@ -66,6 +67,8 @@ export const changeBackgroundColor = function (card) {
   card.classList.add("active");
 };
 
-// export const fillInputs = function() {
-
-// }
+export const fillInputs = function (note) {
+  console.log();
+  document.querySelector("#input__title").value = note.title;
+  document.querySelector("#input__content").value = note.content;
+};
