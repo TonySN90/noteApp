@@ -77,6 +77,8 @@ export const updateDOM = function (changedNote) {
       timestampElement.innerHTML = changedNote.timeStamp;
     }
   }
+
+  activeNote.classList.remove("active");
 };
 
 export const displayInputField = function () {

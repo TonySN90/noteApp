@@ -44,11 +44,15 @@ const setCardActive = function (card) {
 };
 
 const createNote = function () {
+  let id = Math.trunc(Math.random() * 1000) + 1;
+  if (state.active) id = state.currentNote.id;
+
+  console.log(id);
   return {
     title: view.inputTitle,
     content: view.inputContent,
     timeStamp: "Heute",
-    id: Math.trunc(Math.random() * 100) + 1,
+    id: id,
   };
 };
 
@@ -66,24 +70,12 @@ const findNote = function (noteElID) {
   return notesList.find((note) => note.id == noteElID);
 };
 
-const createNewEntry = function (e) {
-  const note = createNote();
-  pushNoteToList(note);
-
-  view.buildHtmlMarkup(note);
-  view.closeInputField();
-  view.clearInputs();
-
-  state.checked = false;
-};
-
 const changeCurrentEntry = function (changedNote) {
   notesList.forEach((note) => {
     if (note.id == state.currentNote.id) {
       note.title = changedNote.title;
       note.content = changedNote.content;
       note.timeStamp = changedNote.timeStamp;
-      console.log(changedNote);
     }
   });
 };
@@ -99,20 +91,23 @@ openBtn.addEventListener("click", view.displayInputField);
 
 storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
   view.getInput();
   checkInput();
-
-  if (state.checked && state.active) {
+  if (state.checked) {
     const note = createNote();
-    changeCurrentEntry(note);
-    view.updateDOM(note);
+    if (state.active) {
+      changeCurrentEntry(note);
+      view.updateDOM(note);
+      state.active = false;
+    } else {
+      pushNoteToList(note);
+      view.buildHtmlMarkup(note);
+    }
 
     view.closeInputField();
     view.clearInputs();
-    state.active = false;
-  } else if (state.checked) {
-    createNewEntry(e);
+    state.checked = false;
+    console.log(notesList);
   }
 });
 
