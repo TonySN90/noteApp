@@ -80,7 +80,6 @@ const changeCurrentEntry = function (changedNote) {
 };
 
 const deleteLIstEntry = function () {
-  // notesList = notesList.filter((note) => note.id !== state.currentNote.id);
   const indexToDelete = notesList.findIndex(
     (note) => note.id === state.currentNote.id
   );
@@ -96,7 +95,10 @@ const init = function () {
 init();
 
 // Eventlistener --
-openBtn.addEventListener("click", view.displayInputField);
+openBtn.addEventListener("click", () => {
+  view.displayInputField();
+  view.handleDeleteBtn(deleteBtn, false);
+});
 
 storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -121,23 +123,24 @@ storeBtn.addEventListener("click", (e) => {
 });
 
 deleteBtn.addEventListener("click", () => {
+  state.active = false;
   deleteLIstEntry();
   view.deleteElement(state.currentNote);
   view.closeInputField();
   view.clearInputs();
-  state.active = false;
+  view.handleDeleteBtn(deleteBtn, state);
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
   const noteEl = e.target.closest(".card__container");
   if (!noteEl) return;
 
+  state.active = true;
   setCardActive(noteEl);
   view.displayInputField();
+  view.handleDeleteBtn(deleteBtn, true);
 
   const noteElID = noteEl.dataset.id;
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
-
-  state.active = true;
 });

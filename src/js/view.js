@@ -53,6 +53,10 @@ export const buildHtmlMarkup = function (note) {
   cards.insertAdjacentElement("afterbegin", containerEl);
 };
 
+export const handleDeleteBtn = function (btn, active) {
+  btn.style.display = active ? "block" : "none";
+};
+
 export const deleteElement = function () {
   const noteEl = document.querySelectorAll(".card__wrapper");
   noteEl.forEach((el) => {
