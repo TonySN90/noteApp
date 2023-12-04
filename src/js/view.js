@@ -53,6 +53,15 @@ export const buildHtmlMarkup = function (note) {
   cards.insertAdjacentElement("afterbegin", containerEl);
 };
 
+export const deleteElement = function () {
+  const noteEl = document.querySelectorAll(".card__wrapper");
+  noteEl.forEach((el) => {
+    if (el.classList.contains("active")) {
+      el.remove();
+    }
+  });
+};
+
 export const updateDOM = function (changedNote) {
   const activeNote = document.querySelector(".active");
 

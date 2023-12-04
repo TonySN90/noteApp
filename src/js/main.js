@@ -5,6 +5,7 @@ import * as view from "./view.js";
 
 const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
+const deleteBtn = document.querySelector(".button__delete");
 
 const state = {
   active: false,
@@ -40,14 +41,12 @@ const checkInput = function () {
 const setCardActive = function (card) {
   const wrapper = card.querySelector(".card__wrapper");
   view.changeBackgroundColor(wrapper);
-  view.displayInputField();
 };
 
 const createNote = function () {
   let id = Math.trunc(Math.random() * 1000) + 1;
   if (state.active) id = state.currentNote.id;
 
-  console.log(id);
   return {
     title: view.inputTitle,
     content: view.inputContent,
@@ -80,6 +79,16 @@ const changeCurrentEntry = function (changedNote) {
   });
 };
 
+const deleteLIstEntry = function () {
+  // notesList = notesList.filter((note) => note.id !== state.currentNote.id);
+  const indexToDelete = notesList.findIndex(
+    (note) => note.id === state.currentNote.id
+  );
+  if (indexToDelete !== -1) {
+    notesList.splice(indexToDelete, 1);
+  }
+};
+
 const init = function () {
   displayNotesList();
 };
@@ -93,6 +102,7 @@ storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   view.getInput();
   checkInput();
+
   if (state.checked) {
     const note = createNote();
     if (state.active) {
@@ -107,8 +117,15 @@ storeBtn.addEventListener("click", (e) => {
     view.closeInputField();
     view.clearInputs();
     state.checked = false;
-    console.log(notesList);
   }
+});
+
+deleteBtn.addEventListener("click", () => {
+  deleteLIstEntry();
+  view.deleteElement(state.currentNote);
+  view.closeInputField();
+  view.clearInputs();
+  state.active = false;
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
@@ -116,6 +133,7 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   if (!noteEl) return;
 
   setCardActive(noteEl);
+  view.displayInputField();
 
   const noteElID = noteEl.dataset.id;
   state.currentNote = findNote(noteElID);
