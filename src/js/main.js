@@ -9,6 +9,7 @@ const storeBtn = document.querySelector(".button__store");
 const state = {
   active: false,
   checked: false,
+  currentNote: "",
 };
 
 const notesList = [
@@ -16,13 +17,13 @@ const notesList = [
     title: "Test Titel",
     content: "Test Inhalt",
     timeStamp: "gestern",
-    id: Math.trunc(Math.random() * 100) + 1,
+    id: 101,
   },
   {
     title: "Test Titel2",
     content: "Test Inhalt2",
     timeStamp: "heute",
-    id: Math.trunc(Math.random() * 100) + 1,
+    id: 102,
   },
 ];
 
@@ -76,6 +77,17 @@ const createNewEntry = function (e) {
   state.checked = false;
 };
 
+const changeCurrentEntry = function (changedNote) {
+  notesList.forEach((note) => {
+    if (note.id == state.currentNote.id) {
+      note.title = changedNote.title;
+      note.content = changedNote.content;
+      note.timeStamp = changedNote.timeStamp;
+      console.log(changedNote);
+    }
+  });
+};
+
 const init = function () {
   displayNotesList();
 };
@@ -92,7 +104,13 @@ storeBtn.addEventListener("click", (e) => {
   checkInput();
 
   if (state.checked && state.active) {
-    // Hier weiter machen Dulli!!!
+    const note = createNote();
+    changeCurrentEntry(note);
+    view.updateDOM(note);
+
+    view.closeInputField();
+    view.clearInputs();
+    state.active = false;
   } else if (state.checked) {
     createNewEntry(e);
   }
@@ -102,11 +120,11 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   const noteEl = e.target.closest(".card__container");
   if (!noteEl) return;
 
-  state.active = true;
   setCardActive(noteEl);
 
   const noteElID = noteEl.dataset.id;
-  const currentNote = findNote(noteElID);
+  state.currentNote = findNote(noteElID);
+  view.fillInputs(state.currentNote);
 
-  view.fillInputs(currentNote);
+  state.active = true;
 });

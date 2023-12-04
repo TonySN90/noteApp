@@ -53,6 +53,32 @@ export const buildHtmlMarkup = function (note) {
   cards.insertAdjacentElement("afterbegin", containerEl);
 };
 
+export const updateDOM = function (changedNote) {
+  const activeNote = document.querySelector(".active");
+
+  if (activeNote) {
+    const titleElement = activeNote.querySelector(".card__contentarea-title");
+    const contentElement = activeNote.querySelector(
+      ".card__contentarea-content"
+    );
+    const timestampElement = activeNote.querySelector(
+      ".card__contentarea-timestamp"
+    );
+
+    if (titleElement) {
+      titleElement.innerHTML = changedNote.title;
+    }
+
+    if (contentElement) {
+      contentElement.innerHTML = changedNote.content;
+    }
+
+    if (timestampElement) {
+      timestampElement.innerHTML = changedNote.timeStamp;
+    }
+  }
+};
+
 export const displayInputField = function () {
   inputField.style.width = "80%";
 };
