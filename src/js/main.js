@@ -2,6 +2,7 @@
 
 import "./../scss/main.scss";
 import * as view from "./view.js";
+import * as utils from "./utils.js";
 
 const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
@@ -57,7 +58,7 @@ const createNote = function () {
   return {
     title: view.inputTitle,
     content: view.inputContent,
-    timeStamp: "Heute",
+    timeStamp: utils.createDate(),
     color: view.inputColor,
     id: id,
   };
