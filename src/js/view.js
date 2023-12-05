@@ -22,6 +22,14 @@ export const handleInfo = function (empty) {
   if (!empty) infoText.classList.remove("hidden");
 };
 
+export const displayAlter = function () {
+  const alert = document.querySelector(".alert");
+  alert.style.opacity = "1";
+  setTimeout(() => {
+    alert.style.opacity = "0";
+  }, 2500);
+};
+
 export const buildHtmlMarkup = function (note) {
   const containerEl = document.createElement("div");
   containerEl.setAttribute("class", "card__container");
@@ -120,7 +128,7 @@ export const changeBackgroundColor = function (card) {
 };
 
 export const fillInputs = function (note) {
-  console.log();
   document.querySelector("#input__title").value = note.title;
   document.querySelector("#input__content").value = note.content;
+  document.querySelector("#input__color").value = note.color;
 };

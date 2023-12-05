@@ -18,17 +18,17 @@ const state = {
 const notesList = [];
 
 const checkInput = function () {
-  const inputs = view.getInput();
-  const { inputTitle, inputContent } = inputs;
+  const inputValues = view.getInput();
+  const { inputTitle, inputContent } = inputValues;
   if (inputTitle === "") {
-    console.log("trage Titel ein");
+    view.displayAlter();
   } else if (inputContent === "") {
     console.log("trage Content ein");
   } else {
     state.checked = true;
   }
 
-  return inputs;
+  return inputValues;
 };
 
 const setCardActive = function (card) {
@@ -44,7 +44,7 @@ const createNote = function (inputData) {
   const { inputTitle, inputContent, inputColor } = inputData;
   checkInput(inputTitle, inputContent);
 
-  const newNoteId = Math.trunc(Math.random() * 1000) + 1;
+  let newNoteId = Math.trunc(Math.random() * 1000) + 1;
   if (state.active) newNoteId = state.currentNote.id;
 
   return {
@@ -160,7 +160,6 @@ document.querySelector("#cards").addEventListener("click", (e) => {
 
 // input check, Alert ausgeben ect.
 // create id
-// Farbwert zurückgeben
 // sortieren nach Datum
-// inputvalues anpassen
 // local storage einrichten
+// inputArea border problem
