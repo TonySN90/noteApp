@@ -15,31 +15,20 @@ const state = {
   currentNote: "",
 };
 
-const notesList = [
-  // {
-  //   title: "Test Titel",
-  //   content: "Test Inhalt",
-  //   timeStamp: "gestern",
-  //   color: "#eb4d4b",
-  //   id: 101,
-  // },
-  // {
-  //   title: "Test Titel2",
-  //   content: "Test Inhalt2",
-  //   timeStamp: "heute",
-  //   color: "#ebed79",
-  //   id: 102,
-  // },
-];
+const notesList = [];
 
 const checkInput = function () {
-  if (view.inputTitle === "") {
+  const inputs = view.getInput();
+  const { inputTitle, inputContent } = inputs;
+  if (inputTitle === "") {
     console.log("trage Titel ein");
-  } else if (view.inputContent === "") {
+  } else if (inputContent === "") {
     console.log("trage Content ein");
   } else {
     state.checked = true;
   }
+
+  return inputs;
 };
 
 const setCardActive = function (card) {
@@ -51,16 +40,20 @@ const unsetCardActive = function () {
   view.changeBackgroundColor();
 };
 
-const createNote = function () {
-  let id = Math.trunc(Math.random() * 1000) + 1;
-  if (state.active) id = state.currentNote.id;
+const createNote = function (inputData) {
+  const { inputTitle, inputContent, inputColor } = inputData;
+  checkInput(inputTitle, inputContent);
+
+  const newNoteId = Math.trunc(Math.random() * 1000) + 1;
+  if (state.active) newNoteId = state.currentNote.id;
 
   return {
-    title: view.inputTitle,
-    content: view.inputContent,
+    title: inputTitle,
+    content: inputContent,
+    color: inputColor,
+
     timeStamp: utils.createDate(),
-    color: view.inputColor,
-    id: id,
+    id: newNoteId,
   };
 };
 
@@ -98,7 +91,7 @@ const deleteLIstEntry = function () {
 };
 
 const init = function () {
-  view.handleInfo(notesList.length == 0);
+  view.handleInfo(notesList.length !== 0);
   displayNotesList();
 };
 
@@ -115,10 +108,10 @@ openBtn.addEventListener("click", () => {
 storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   view.getInput();
-  checkInput();
+  const inputData = checkInput();
 
   if (state.checked) {
-    const note = createNote();
+    const note = createNote(inputData);
     if (state.active) {
       changeCurrentEntry(note);
       view.updateDOM(note);
@@ -130,7 +123,7 @@ storeBtn.addEventListener("click", (e) => {
 
     view.closeInputField();
     state.checked = false;
-    view.handleInfo(notesList.length == 0);
+    view.handleInfo(notesList.length !== 0);
   }
 });
 
@@ -140,7 +133,7 @@ deleteBtn.addEventListener("click", () => {
   view.deleteElement(state.currentNote);
   view.closeInputField();
   view.handleDeleteBtn(deleteBtn, state);
-  view.handleInfo(notesList.length == 0);
+  view.handleInfo(notesList.length !== 0);
 });
 
 backBtn.addEventListener("click", () => {
@@ -165,7 +158,9 @@ document.querySelector("#cards").addEventListener("click", (e) => {
 
 // To Do
 
-// Noch keine Notizen vorhanden
 // input check, Alert ausgeben ect.
 // create id
 // Farbwert zurückgeben
+// sortieren nach Datum
+// inputvalues anpassen
+// local storage einrichten

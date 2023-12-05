@@ -3,15 +3,12 @@
 const inputField = document.querySelector("#inputField");
 const cards = document.querySelector("#cards");
 
-// Export Data
-export let inputTitle = "";
-export let inputContent = "";
-export let inputColor = "";
-
 export const getInput = function () {
-  inputTitle = document.querySelector("#input__title").value;
-  inputContent = document.querySelector("#input__content").value;
-  inputColor = document.querySelector("#input__color").value;
+  return {
+    inputTitle: document.querySelector("#input__title").value,
+    inputContent: document.querySelector("#input__content").value,
+    inputColor: document.querySelector("#input__color").value,
+  };
 };
 
 export const clearInputs = function () {
@@ -21,8 +18,8 @@ export const clearInputs = function () {
 
 export const handleInfo = function (empty) {
   const infoText = document.querySelector(".info__text");
-  if (empty) infoText.classList.remove("hidden");
-  if (!empty) infoText.classList.add("hidden");
+  if (empty) infoText.classList.add("hidden");
+  if (!empty) infoText.classList.remove("hidden");
 };
 
 export const buildHtmlMarkup = function (note) {
