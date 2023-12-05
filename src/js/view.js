@@ -89,7 +89,6 @@ export const updateDOM = function (changedNote) {
     }
 
     if (timestampElement) {
-      console.log("jo");
       timestampElement.innerHTML = changedNote.timeStamp;
     }
   }

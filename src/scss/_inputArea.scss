@@ -14,6 +14,7 @@
 
   @mixin input-field-styles {
     display: block;
+    min-width: 260px;
     width: 90%;
     margin: 1rem auto;
     border: none;
@@ -31,12 +32,27 @@
 
   textarea {
     @include input-field-styles;
-    height: 72%;
+    height: 60%;
     padding: 1rem;
     font-size: 1rem;
-
-    white-space: pre-wrap;
     overflow-x: hidden;
+  }
+
+  input[type="color"] {
+    width: 2.9rem;
+    margin: 0.3rem;
+    height: 2.8rem;
+    border: none;
+    background: transparent;
+  }
+
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
   }
 
   .button__area {

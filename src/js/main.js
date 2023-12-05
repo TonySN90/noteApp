@@ -103,6 +103,7 @@ init();
 openBtn.addEventListener("click", () => {
   view.displayInputField();
   view.handleDeleteBtn(deleteBtn, false);
+  view.clearInputs();
 });
 
 storeBtn.addEventListener("click", (e) => {
@@ -122,7 +123,6 @@ storeBtn.addEventListener("click", (e) => {
     }
 
     view.closeInputField();
-    // view.clearInputs();
     state.checked = false;
   }
 });
@@ -132,18 +132,12 @@ deleteBtn.addEventListener("click", () => {
   deleteLIstEntry();
   view.deleteElement(state.currentNote);
   view.closeInputField();
-  // view.clearInputs();
   view.handleDeleteBtn(deleteBtn, state);
 });
 
 backBtn.addEventListener("click", () => {
   state.active = false;
   view.closeInputField();
-<<<<<<< HEAD
-  // view.clearInputs();
-=======
-  view.clearInputs();
->>>>>>> e61916753853faee40e2ed23a5153ae7ff498a69
   unsetCardActive();
 });
 
@@ -160,11 +154,3 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
 });
-
-<<<<<<< HEAD
-// document.addEventListener("transitionend", () => {
-//   view.clearInputs();
-// });
-=======
-document.addEventListener("transitionend", () => {});
->>>>>>> e61916753853faee40e2ed23a5153ae7ff498a69
