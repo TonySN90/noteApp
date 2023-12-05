@@ -33,10 +33,12 @@ export const buildHtmlMarkup = function (note) {
 
   const titleEl = document.createElement("h2");
   titleEl.setAttribute("class", "card__contentarea-title");
+  titleEl.setAttribute("class", "truncation");
   titleEl.innerHTML = note.title;
 
   const contentEl = document.createElement("div");
   contentEl.setAttribute("class", "card__contentarea-content");
+  contentEl.setAttribute("class", "truncation");
   contentEl.innerHTML = note.content;
 
   const timeStampEl = document.createElement("div");
@@ -61,7 +63,7 @@ export const deleteElement = function () {
   const noteEl = document.querySelectorAll(".card__wrapper");
   noteEl.forEach((el) => {
     if (el.classList.contains("active")) {
-      el.remove();
+      el.parentElement.remove();
     }
   });
 };
