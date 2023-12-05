@@ -2,7 +2,6 @@
 
 const inputField = document.querySelector("#inputField");
 const cards = document.querySelector("#cards");
-const textArea = document.querySelector("#input__content");
 
 // Export Data
 export let inputTitle = "";
@@ -18,6 +17,12 @@ export const getInput = function () {
 export const clearInputs = function () {
   document.querySelector("#input__title").value = "";
   document.querySelector("#input__content").value = "";
+};
+
+export const handleInfo = function (empty) {
+  const infoText = document.querySelector(".info__text");
+  if (empty) infoText.classList.remove("hidden");
+  if (!empty) infoText.classList.add("hidden");
 };
 
 export const buildHtmlMarkup = function (note) {

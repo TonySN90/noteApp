@@ -16,20 +16,20 @@ const state = {
 };
 
 const notesList = [
-  {
-    title: "Test Titel",
-    content: "Test Inhalt",
-    timeStamp: "gestern",
-    color: "#eb4d4b",
-    id: 101,
-  },
-  {
-    title: "Test Titel2",
-    content: "Test Inhalt2",
-    timeStamp: "heute",
-    color: "#ebed79",
-    id: 102,
-  },
+  // {
+  //   title: "Test Titel",
+  //   content: "Test Inhalt",
+  //   timeStamp: "gestern",
+  //   color: "#eb4d4b",
+  //   id: 101,
+  // },
+  // {
+  //   title: "Test Titel2",
+  //   content: "Test Inhalt2",
+  //   timeStamp: "heute",
+  //   color: "#ebed79",
+  //   id: 102,
+  // },
 ];
 
 const checkInput = function () {
@@ -98,12 +98,14 @@ const deleteLIstEntry = function () {
 };
 
 const init = function () {
+  view.handleInfo(notesList.length == 0);
   displayNotesList();
 };
 
 init();
 
-// Eventlistener --
+// Eventlistener ------------------------------------
+
 openBtn.addEventListener("click", () => {
   view.displayInputField();
   view.handleDeleteBtn(deleteBtn, false);
@@ -128,6 +130,7 @@ storeBtn.addEventListener("click", (e) => {
 
     view.closeInputField();
     state.checked = false;
+    view.handleInfo(notesList.length == 0);
   }
 });
 
@@ -137,6 +140,7 @@ deleteBtn.addEventListener("click", () => {
   view.deleteElement(state.currentNote);
   view.closeInputField();
   view.handleDeleteBtn(deleteBtn, state);
+  view.handleInfo(notesList.length == 0);
 });
 
 backBtn.addEventListener("click", () => {
@@ -158,3 +162,10 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
 });
+
+// To Do
+
+// Noch keine Notizen vorhanden
+// input check, Alert ausgeben ect.
+// create id
+// Farbwert zurückgeben
