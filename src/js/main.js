@@ -139,7 +139,11 @@ deleteBtn.addEventListener("click", () => {
 backBtn.addEventListener("click", () => {
   state.active = false;
   view.closeInputField();
+<<<<<<< HEAD
   // view.clearInputs();
+=======
+  view.clearInputs();
+>>>>>>> e61916753853faee40e2ed23a5153ae7ff498a69
   unsetCardActive();
 });
 
@@ -157,6 +161,10 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   view.fillInputs(state.currentNote);
 });
 
+<<<<<<< HEAD
 // document.addEventListener("transitionend", () => {
 //   view.clearInputs();
 // });
+=======
+document.addEventListener("transitionend", () => {});
+>>>>>>> e61916753853faee40e2ed23a5153ae7ff498a69
