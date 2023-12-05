@@ -3,6 +3,7 @@
 import "./../scss/main.scss";
 import * as view from "./view.js";
 import * as utils from "./utils.js";
+import * as config from "./config.js";
 import { v4 as uuidv4 } from "uuid";
 
 const openBtn = document.querySelector(".button__open");
@@ -10,13 +11,15 @@ const storeBtn = document.querySelector(".button__store");
 const deleteBtn = document.querySelector(".button__delete");
 const backBtn = document.querySelector(".button__back");
 
+// const STORAGE_KEY = "notesList";
+
 const state = {
   active: false,
   checked: false,
   currentNote: "",
 };
 
-const notesList = [];
+let notesList = [];
 
 const checkInput = function () {
   const inputValues = view.getInput();
@@ -65,9 +68,6 @@ const pushNoteToList = function (note) {
 
 const displayNotesList = function () {
   view.clearDOM();
-  const sortedList = notesList.map((note) => note);
-  console.log(sortedList);
-
   notesList.forEach((note) => {
     view.buildHtmlMarkup(note);
   });
@@ -96,7 +96,17 @@ const deleteLIstEntry = function () {
   }
 };
 
+const safeToLocalStorage = function () {
+  localStorage.setItem(config.STORAGE_KEY, JSON.stringify(notesList));
+};
+
+const getListFromStorage = function () {
+  const list = JSON.parse(localStorage.getItem(config.STORAGE_KEY));
+  notesList = list;
+};
+
 const init = function () {
+  getListFromStorage();
   view.handleInfo(notesList.length !== 0);
   displayNotesList();
 };
@@ -123,6 +133,7 @@ storeBtn.addEventListener("click", (e) => {
       // view.updateDOM(note);
       deleteLIstEntry();
       view.deleteElement(state.currentNote);
+
       pushNoteToList(note);
       view.buildHtmlMarkup(note);
       state.active = false;
@@ -134,6 +145,7 @@ storeBtn.addEventListener("click", (e) => {
     view.closeInputField();
     state.checked = false;
     view.handleInfo(notesList.length !== 0);
+    safeToLocalStorage();
   }
 });
 
@@ -144,6 +156,7 @@ deleteBtn.addEventListener("click", () => {
   view.closeInputField();
   view.handleDeleteBtn(deleteBtn, state);
   view.handleInfo(notesList.length !== 0);
+  safeToLocalStorage();
 });
 
 backBtn.addEventListener("click", () => {
@@ -164,10 +177,9 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   const noteElID = noteEl.dataset.id;
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
+  safeToLocalStorage();
 });
 
 // To Do
 
-// create id
-// local storage einrichten
 // inputArea border problem
