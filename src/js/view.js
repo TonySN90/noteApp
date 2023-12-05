@@ -16,14 +16,27 @@ export const clearInputs = function () {
   document.querySelector("#input__content").value = "";
 };
 
+export const clearDOM = function () {
+  const cards = document.querySelectorAll(".card__container");
+  cards.forEach((card) => card.remove());
+};
+
 export const handleInfo = function (empty) {
   const infoText = document.querySelector(".info__text");
   if (empty) infoText.classList.add("hidden");
   if (!empty) infoText.classList.remove("hidden");
 };
 
-export const displayAlter = function () {
+export const displayAlert = function (text) {
   const alert = document.querySelector(".alert");
+  const alertText = document.querySelector(".alert > p");
+
+  if (text === "title") {
+    alertText.innerHTML = "Gib einen Titel ein!";
+  } else {
+    alertText.innerHTML = "Gib deine Notiz ein!";
+  }
+
   alert.style.opacity = "1";
   setTimeout(() => {
     alert.style.opacity = "0";

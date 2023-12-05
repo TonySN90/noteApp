@@ -20,10 +20,11 @@ const notesList = [];
 const checkInput = function () {
   const inputValues = view.getInput();
   const { inputTitle, inputContent } = inputValues;
+
   if (inputTitle === "") {
-    view.displayAlter();
+    view.displayAlert("title");
   } else if (inputContent === "") {
-    console.log("trage Content ein");
+    view.displayAlert("content");
   } else {
     state.checked = true;
   }
@@ -62,6 +63,10 @@ const pushNoteToList = function (note) {
 };
 
 const displayNotesList = function () {
+  view.clearDOM();
+  const sortedList = notesList.map((note) => note);
+  console.log(sortedList);
+
   notesList.forEach((note) => {
     view.buildHtmlMarkup(note);
   });
@@ -71,15 +76,15 @@ const findNote = function (noteElID) {
   return notesList.find((note) => note.id == noteElID);
 };
 
-const changeCurrentEntry = function (changedNote) {
-  notesList.forEach((note) => {
-    if (note.id == state.currentNote.id) {
-      note.title = changedNote.title;
-      note.content = changedNote.content;
-      note.timeStamp = changedNote.timeStamp;
-    }
-  });
-};
+// const changeCurrentEntry = function (changedNote) {
+//   notesList.forEach((note) => {
+//     if (note.id == state.currentNote.id) {
+//       note.title = changedNote.title;
+//       note.content = changedNote.content;
+//       note.timeStamp = changedNote.timeStamp;
+//     }
+//   });
+// };
 
 const deleteLIstEntry = function () {
   const indexToDelete = notesList.findIndex(
@@ -113,8 +118,12 @@ storeBtn.addEventListener("click", (e) => {
   if (state.checked) {
     const note = createNote(inputData);
     if (state.active) {
-      changeCurrentEntry(note);
-      view.updateDOM(note);
+      // changeCurrentEntry(note);
+      // view.updateDOM(note);
+      deleteLIstEntry();
+      view.deleteElement(state.currentNote);
+      pushNoteToList(note);
+      view.buildHtmlMarkup(note);
       state.active = false;
     } else {
       pushNoteToList(note);
@@ -158,7 +167,6 @@ document.querySelector("#cards").addEventListener("click", (e) => {
 
 // To Do
 
-// input check, Alert ausgeben ect.
 // create id
 // sortieren nach Datum
 // local storage einrichten
