@@ -2,6 +2,7 @@
 
 const inputField = document.querySelector("#inputField");
 const cards = document.querySelector("#cards");
+const textArea = document.querySelector("#input__content");
 
 // Export Data
 export let inputTitle = "";
@@ -32,13 +33,11 @@ export const buildHtmlMarkup = function (note) {
   contentAreaEl.setAttribute("class", "card__wrapper-contentarea");
 
   const titleEl = document.createElement("h2");
-  titleEl.setAttribute("class", "card__contentarea-title");
-  titleEl.setAttribute("class", "truncation");
+  titleEl.classList.add("card__contentarea-title", "truncation");
   titleEl.innerHTML = note.title;
 
   const contentEl = document.createElement("div");
-  contentEl.setAttribute("class", "card__contentarea-content");
-  contentEl.setAttribute("class", "truncation");
+  contentEl.classList.add("card__contentarea-content", "truncation");
   contentEl.innerHTML = note.content;
 
   const timeStampEl = document.createElement("div");
@@ -71,6 +70,7 @@ export const deleteElement = function () {
 export const updateDOM = function (changedNote) {
   const activeNote = document.querySelector(".active");
 
+  // console.log(activeNote);
   if (activeNote) {
     const titleElement = activeNote.querySelector(".card__contentarea-title");
     const contentElement = activeNote.querySelector(
@@ -89,6 +89,7 @@ export const updateDOM = function (changedNote) {
     }
 
     if (timestampElement) {
+      console.log("jo");
       timestampElement.innerHTML = changedNote.timeStamp;
     }
   }
@@ -107,7 +108,8 @@ export const closeInputField = function () {
 export const changeBackgroundColor = function (card) {
   const cards = document.querySelectorAll(".card__wrapper");
   cards.forEach((cards) => cards.classList.remove("active"));
-  card.classList.add("active");
+
+  if (card) card.classList.add("active");
 };
 
 export const fillInputs = function (note) {

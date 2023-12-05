@@ -10,7 +10,7 @@
   border-left: 5px solid $color--primary;
 
   background-color: $color--bg-middle;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.4s ease-in-out;
 
   @mixin input-field-styles {
     display: block;
@@ -35,7 +35,7 @@
     padding: 1rem;
     font-size: 1rem;
 
-    // white-space: pre;
+    white-space: pre-wrap;
     overflow-x: hidden;
   }
 

@@ -44,6 +44,10 @@ const setCardActive = function (card) {
   view.changeBackgroundColor(wrapper);
 };
 
+const unsetCardActive = function () {
+  view.changeBackgroundColor();
+};
+
 const createNote = function () {
   let id = Math.trunc(Math.random() * 1000) + 1;
   if (state.active) id = state.currentNote.id;
@@ -118,7 +122,7 @@ storeBtn.addEventListener("click", (e) => {
     }
 
     view.closeInputField();
-    view.clearInputs();
+    // view.clearInputs();
     state.checked = false;
   }
 });
@@ -128,14 +132,15 @@ deleteBtn.addEventListener("click", () => {
   deleteLIstEntry();
   view.deleteElement(state.currentNote);
   view.closeInputField();
-  view.clearInputs();
+  // view.clearInputs();
   view.handleDeleteBtn(deleteBtn, state);
 });
 
 backBtn.addEventListener("click", () => {
   state.active = false;
   view.closeInputField();
-  view.clearInputs();
+  // view.clearInputs();
+  unsetCardActive();
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
@@ -151,3 +156,7 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
 });
+
+// document.addEventListener("transitionend", () => {
+//   view.clearInputs();
+// });
