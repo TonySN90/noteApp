@@ -3,6 +3,7 @@
 import "./../scss/main.scss";
 import * as view from "./view.js";
 import * as utils from "./utils.js";
+import { v4 as uuidv4 } from "uuid";
 
 const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
@@ -54,7 +55,7 @@ const createNote = function (inputData) {
     color: inputColor,
 
     timeStamp: utils.createDate(),
-    id: newNoteId,
+    id: uuidv4(),
   };
 };
 
@@ -168,6 +169,5 @@ document.querySelector("#cards").addEventListener("click", (e) => {
 // To Do
 
 // create id
-// sortieren nach Datum
 // local storage einrichten
 // inputArea border problem
