@@ -6,6 +6,7 @@ import * as view from "./view.js";
 const openBtn = document.querySelector(".button__open");
 const storeBtn = document.querySelector(".button__store");
 const deleteBtn = document.querySelector(".button__delete");
+const backBtn = document.querySelector(".button__back");
 
 const state = {
   active: false,
@@ -129,6 +130,12 @@ deleteBtn.addEventListener("click", () => {
   view.closeInputField();
   view.clearInputs();
   view.handleDeleteBtn(deleteBtn, state);
+});
+
+backBtn.addEventListener("click", () => {
+  state.active = false;
+  view.closeInputField();
+  view.clearInputs();
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
