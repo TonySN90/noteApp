@@ -44,6 +44,10 @@ const setCardActive = function (card) {
   view.changeBackgroundColor(wrapper);
 };
 
+const unsetCardActive = function () {
+  view.changeBackgroundColor();
+};
+
 const createNote = function () {
   let id = Math.trunc(Math.random() * 1000) + 1;
   if (state.active) id = state.currentNote.id;
@@ -136,6 +140,7 @@ backBtn.addEventListener("click", () => {
   state.active = false;
   view.closeInputField();
   view.clearInputs();
+  unsetCardActive();
 });
 
 document.querySelector("#cards").addEventListener("click", (e) => {
@@ -151,3 +156,5 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   state.currentNote = findNote(noteElID);
   view.fillInputs(state.currentNote);
 });
+
+document.addEventListener("transitionend", () => {});

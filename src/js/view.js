@@ -107,7 +107,8 @@ export const closeInputField = function () {
 export const changeBackgroundColor = function (card) {
   const cards = document.querySelectorAll(".card__wrapper");
   cards.forEach((cards) => cards.classList.remove("active"));
-  card.classList.add("active");
+
+  if (card) card.classList.add("active");
 };
 
 export const fillInputs = function (note) {
