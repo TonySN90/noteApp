@@ -19,12 +19,14 @@ const notesList = [
     title: "Test Titel",
     content: "Test Inhalt",
     timeStamp: "gestern",
+    color: "#eb4d4b",
     id: 101,
   },
   {
     title: "Test Titel2",
     content: "Test Inhalt2",
     timeStamp: "heute",
+    color: "#ebed79",
     id: 102,
   },
 ];
@@ -56,6 +58,7 @@ const createNote = function () {
     title: view.inputTitle,
     content: view.inputContent,
     timeStamp: "Heute",
+    color: view.inputColor,
     id: id,
   };
 };

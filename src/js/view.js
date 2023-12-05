@@ -7,10 +7,12 @@ const textArea = document.querySelector("#input__content");
 // Export Data
 export let inputTitle = "";
 export let inputContent = "";
+export let inputColor = "";
 
 export const getInput = function () {
   inputTitle = document.querySelector("#input__title").value;
   inputContent = document.querySelector("#input__content").value;
+  inputColor = document.querySelector("#input__color").value;
 };
 
 export const clearInputs = function () {
@@ -28,6 +30,7 @@ export const buildHtmlMarkup = function (note) {
 
   const colorStripEl = document.createElement("div");
   colorStripEl.setAttribute("class", "card__wrapper-colorstrip");
+  colorStripEl.style.backgroundColor = note.color;
 
   const contentAreaEl = document.createElement("div");
   contentAreaEl.setAttribute("class", "card__wrapper-contentarea");
@@ -70,7 +73,6 @@ export const deleteElement = function () {
 export const updateDOM = function (changedNote) {
   const activeNote = document.querySelector(".active");
 
-  // console.log(activeNote);
   if (activeNote) {
     const titleElement = activeNote.querySelector(".card__contentarea-title");
     const contentElement = activeNote.querySelector(
@@ -79,6 +81,7 @@ export const updateDOM = function (changedNote) {
     const timestampElement = activeNote.querySelector(
       ".card__contentarea-timestamp"
     );
+    const colorElement = activeNote.querySelector(".card__wrapper-colorstrip");
 
     if (titleElement) {
       titleElement.innerHTML = changedNote.title;
@@ -90,6 +93,9 @@ export const updateDOM = function (changedNote) {
 
     if (timestampElement) {
       timestampElement.innerHTML = changedNote.timeStamp;
+    }
+    if (colorElement) {
+      colorElement.style.backgroundColor = changedNote.color;
     }
   }
 
