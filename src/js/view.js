@@ -1,8 +1,8 @@
 "use strict";
 
-const cards = document.querySelector("#cards");
-const container = document.querySelectorAll(".card__container");
-const wrapper = document.querySelectorAll(".card__wrapper");
+const cardsEl = document.querySelector("#cards");
+const containerEl = document.querySelectorAll(".card__container");
+const wrapperEl = document.querySelectorAll(".card__wrapper");
 
 const inputField = document.querySelector("#inputField");
 const inputTitle = document.querySelector("#input__title");
@@ -26,7 +26,7 @@ export const clearInputs = function () {
 };
 
 export const clearDOM = function () {
-  container.forEach((card) => card.remove());
+  containerEl.forEach((card) => card.remove());
 };
 
 export const handleInfo = function (empty) {
@@ -50,6 +50,15 @@ const createDiv = function () {
   return document.createElement("div");
 };
 
+const escapeHtml = function (unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
 export const buildHtmlMarkup = function (note) {
   const containerEl = createDiv();
   const wrapperEl = createDiv();
@@ -69,8 +78,8 @@ export const buildHtmlMarkup = function (note) {
 
   containerEl.dataset.id = note.id;
   colorStripEl.style.backgroundColor = note.color;
-  titleEl.innerHTML = note.title;
-  contentEl.innerHTML = note.content;
+  titleEl.innerHTML = escapeHtml(note.title);
+  contentEl.innerHTML = escapeHtml(note.content);
   timeStampEl.innerHTML = note.timeStamp;
 
   containerEl.insertAdjacentElement("afterbegin", wrapperEl);
@@ -80,26 +89,17 @@ export const buildHtmlMarkup = function (note) {
   contentAreaEl.insertAdjacentElement("beforeend", contentEl);
   contentAreaEl.insertAdjacentElement("beforeend", timeStampEl);
 
-  cards.insertAdjacentElement("afterbegin", containerEl);
+  cardsEl.insertAdjacentElement("afterbegin", containerEl);
 };
 
 export const handleDeleteBtn = function (btn, active) {
   btn.style.display = active ? "block" : "none";
 };
 
-// export const deleteElement = function () {
-//   const wrapper = document.querySelectorAll(".card__wrapper");
-//   wrapper.forEach((el) => {
-//     if (el.classList.contains("active")) {
-//       el.parentElement.remove();
-//     }
-//   });
-// };
-
 export const deleteElement = function () {
-  const wrapper = document.querySelector(".card__wrapper.active");
-  if (wrapper) {
-    wrapper.parentElement.remove();
+  const wrapperEl = document.querySelector(".card__wrapper.active");
+  if (wrapperEl) {
+    wrapperEl.parentElement.remove();
   }
 };
 
@@ -116,7 +116,7 @@ export const closeInputField = function () {
 };
 
 export const changeBackgroundColor = function (note) {
-  wrapper.forEach((notes) => notes.classList.remove("active"));
+  wrapperEl.forEach((notes) => notes.classList.remove("active"));
   if (note) note.classList.add("active");
 };
 

@@ -16,8 +16,6 @@ $color--font: #e8e8e8;
 $border-radius: 0.3rem;
 
 body {
-  margin: 0;
-  padding: 0;
   overflow-x: hidden;
 
   background-color: $color--bg-dark;
@@ -26,6 +24,8 @@ body {
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
