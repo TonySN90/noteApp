@@ -10,7 +10,7 @@ const inputContent = document.querySelector("#input__content");
 const inputColor = document.querySelector("#input__color");
 
 const alert = document.querySelector(".alert");
-const alertText = document.querySelector(".info__text");
+const infoText = document.querySelector(".info__text");
 
 export const getInput = function () {
   return {
@@ -30,8 +30,8 @@ export const clearDOM = function () {
 };
 
 export const handleInfo = function (empty) {
-  if (empty) alertText.classList.add("hidden");
-  if (!empty) alertText.classList.remove("hidden");
+  if (empty) infoText.classList.add("hidden");
+  if (!empty) infoText.classList.remove("hidden");
 };
 
 export const displayAlert = function (text) {
@@ -87,13 +87,20 @@ export const handleDeleteBtn = function (btn, active) {
   btn.style.display = active ? "block" : "none";
 };
 
+// export const deleteElement = function () {
+//   const wrapper = document.querySelectorAll(".card__wrapper");
+//   wrapper.forEach((el) => {
+//     if (el.classList.contains("active")) {
+//       el.parentElement.remove();
+//     }
+//   });
+// };
+
 export const deleteElement = function () {
-  const wrapper = document.querySelectorAll(".card__wrapper");
-  wrapper.forEach((el) => {
-    if (el.classList.contains("active")) {
-      el.parentElement.remove();
-    }
-  });
+  const wrapper = document.querySelector(".card__wrapper.active");
+  if (wrapper) {
+    wrapper.parentElement.remove();
+  }
 };
 
 export const displayInputField = function () {
