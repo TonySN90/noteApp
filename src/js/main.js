@@ -13,14 +13,13 @@ const backBtn = document.querySelector(".button__back");
 
 const state = {
   active: false,
-  checked: false,
+  valid: false,
   currentNote: "",
 };
 
 let notesList = [];
 
-const checkInput = function () {
-  const inputValues = view.getInput();
+const processInputValues = function (inputValues) {
   const { inputTitle, inputContent } = inputValues;
 
   // The string is empty or consists only of spaces.
@@ -31,7 +30,7 @@ const checkInput = function () {
   } else if (pattern.test(inputContent)) {
     view.displayAlert("content");
   } else {
-    state.checked = true;
+    state.valid = true;
   }
 
   return inputValues;
@@ -48,7 +47,7 @@ const unsetCardActive = function () {
 
 const createNote = function (inputData) {
   const { inputTitle, inputContent, inputColor } = inputData;
-  checkInput(inputTitle, inputContent);
+  processInputValues(inputTitle, inputContent);
 
   let newNoteId = Math.trunc(Math.random() * 1000) + 1;
   if (state.active) newNoteId = state.currentNote.id;
@@ -113,11 +112,13 @@ openBtn.addEventListener("click", () => {
 
 storeBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  view.getInput();
-  const inputData = checkInput();
 
-  if (state.checked) {
+  const inputValues = view.getInput();
+  const inputData = processInputValues(inputValues);
+
+  if (state.valid) {
     const note = createNote(inputData);
+
     if (state.active) {
       deleteLIstEntry();
       view.deleteElement(state.currentNote);
@@ -131,7 +132,7 @@ storeBtn.addEventListener("click", (e) => {
     }
 
     view.closeInputField();
-    state.checked = false;
+    state.valid = false;
     view.handleInfo(notesList.length !== 0);
     safeToLocalStorage();
   }
@@ -167,5 +168,3 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   view.fillInputs(state.currentNote);
   safeToLocalStorage();
 });
-
-// inputvalidierung

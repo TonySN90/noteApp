@@ -10,9 +10,7 @@ const inputContent = document.querySelector("#input__content");
 const inputColor = document.querySelector("#input__color");
 
 const alert = document.querySelector(".alert");
-const alertText = document.querySelector(".alert > p");
-
-const infoText = document.querySelector(".info__text");
+const alertText = document.querySelector(".info__text");
 
 export const getInput = function () {
   return {
@@ -32,16 +30,15 @@ export const clearDOM = function () {
 };
 
 export const handleInfo = function (empty) {
-  if (empty) infoText.classList.add("hidden");
-  if (!empty) infoText.classList.remove("hidden");
+  if (empty) alertText.classList.add("hidden");
+  if (!empty) alertText.classList.remove("hidden");
 };
 
 export const displayAlert = function (text) {
-  if (text === "title") {
-    alertText.innerHTML = "Gib einen Titel ein!";
-  } else {
-    alertText.innerHTML = "Gib deine Notiz ein!";
-  }
+  alert.innerHTML =
+    text === "title"
+      ? "Gib einen gültigen Titel ein!"
+      : "Gib eine gültige Notiz ein!";
 
   alert.style.opacity = "1";
   setTimeout(() => {
