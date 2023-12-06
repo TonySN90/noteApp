@@ -11,8 +11,6 @@ const storeBtn = document.querySelector(".button__store");
 const deleteBtn = document.querySelector(".button__delete");
 const backBtn = document.querySelector(".button__back");
 
-// const STORAGE_KEY = "notesList";
-
 const state = {
   active: false,
   checked: false,
@@ -77,16 +75,6 @@ const findNote = function (noteElID) {
   return notesList.find((note) => note.id == noteElID);
 };
 
-// const changeCurrentEntry = function (changedNote) {
-//   notesList.forEach((note) => {
-//     if (note.id == state.currentNote.id) {
-//       note.title = changedNote.title;
-//       note.content = changedNote.content;
-//       note.timeStamp = changedNote.timeStamp;
-//     }
-//   });
-// };
-
 const deleteLIstEntry = function () {
   const indexToDelete = notesList.findIndex(
     (note) => note.id === state.currentNote.id
@@ -101,8 +89,8 @@ const safeToLocalStorage = function () {
 };
 
 const getListFromStorage = function () {
-  const list = JSON.parse(localStorage.getItem(config.STORAGE_KEY));
-  notesList = list;
+  const storageList = JSON.parse(localStorage.getItem(config.STORAGE_KEY));
+  if (storageList) notesList = storageList;
 };
 
 const init = function () {
@@ -129,8 +117,6 @@ storeBtn.addEventListener("click", (e) => {
   if (state.checked) {
     const note = createNote(inputData);
     if (state.active) {
-      // changeCurrentEntry(note);
-      // view.updateDOM(note);
       deleteLIstEntry();
       view.deleteElement(state.currentNote);
 

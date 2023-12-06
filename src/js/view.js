@@ -93,44 +93,16 @@ export const deleteElement = function () {
   });
 };
 
-export const updateDOM = function (changedNote) {
-  const activeNote = document.querySelector(".active");
-
-  if (activeNote) {
-    const titleElement = activeNote.querySelector(".card__contentarea-title");
-    const contentElement = activeNote.querySelector(
-      ".card__contentarea-content"
-    );
-    const timestampElement = activeNote.querySelector(
-      ".card__contentarea-timestamp"
-    );
-    const colorElement = activeNote.querySelector(".card__wrapper-colorstrip");
-
-    if (titleElement) {
-      titleElement.innerHTML = changedNote.title;
-    }
-
-    if (contentElement) {
-      contentElement.innerHTML = changedNote.content;
-    }
-
-    if (timestampElement) {
-      timestampElement.innerHTML = changedNote.timeStamp;
-    }
-    if (colorElement) {
-      colorElement.style.backgroundColor = changedNote.color;
-    }
-  }
-
-  activeNote.classList.remove("active");
-};
-
 export const displayInputField = function () {
   inputField.style.width = "80%";
+  inputField.style.borderLeft = "5px solid #eb4d4b";
 };
 
 export const closeInputField = function () {
   inputField.style.width = "0%";
+  setTimeout(() => {
+    inputField.style.border = "none";
+  }, 400);
 };
 
 export const changeBackgroundColor = function (card) {
