@@ -1,7 +1,18 @@
 "use strict";
 
-const inputField = document.querySelector("#inputField");
 const cards = document.querySelector("#cards");
+const container = document.querySelectorAll(".card__container");
+const wrapper = document.querySelectorAll(".card__wrapper");
+
+const inputField = document.querySelector("#inputField");
+const inputTitle = document.querySelector("#input__title");
+const inputContent = document.querySelector("#input__content");
+const inputColor = document.querySelector("#input__color");
+
+const alert = document.querySelector(".alert");
+const alertText = document.querySelector(".alert > p");
+
+const infoText = document.querySelector(".info__text");
 
 export const getInput = function () {
   return {
@@ -12,25 +23,20 @@ export const getInput = function () {
 };
 
 export const clearInputs = function () {
-  document.querySelector("#input__title").value = "";
-  document.querySelector("#input__content").value = "";
+  inputTitle.value = "";
+  inputContent.value = "";
 };
 
 export const clearDOM = function () {
-  const cards = document.querySelectorAll(".card__container");
-  cards.forEach((card) => card.remove());
+  container.forEach((card) => card.remove());
 };
 
 export const handleInfo = function (empty) {
-  const infoText = document.querySelector(".info__text");
   if (empty) infoText.classList.add("hidden");
   if (!empty) infoText.classList.remove("hidden");
 };
 
 export const displayAlert = function (text) {
-  const alert = document.querySelector(".alert");
-  const alertText = document.querySelector(".alert > p");
-
   if (text === "title") {
     alertText.innerHTML = "Gib einen Titel ein!";
   } else {
@@ -43,31 +49,31 @@ export const displayAlert = function (text) {
   }, 2500);
 };
 
+const createDiv = function () {
+  return document.createElement("div");
+};
+
 export const buildHtmlMarkup = function (note) {
-  const containerEl = document.createElement("div");
-  containerEl.setAttribute("class", "card__container");
-  containerEl.dataset.id = note.id;
-
-  const wrapperEl = document.createElement("div");
-  wrapperEl.setAttribute("class", "card__wrapper");
-
-  const colorStripEl = document.createElement("div");
-  colorStripEl.setAttribute("class", "card__wrapper-colorstrip");
-  colorStripEl.style.backgroundColor = note.color;
-
-  const contentAreaEl = document.createElement("div");
-  contentAreaEl.setAttribute("class", "card__wrapper-contentarea");
-
+  const containerEl = createDiv();
+  const wrapperEl = createDiv();
+  const colorStripEl = createDiv();
+  const contentAreaEl = createDiv();
+  const contentEl = createDiv();
   const titleEl = document.createElement("h2");
+  const timeStampEl = createDiv();
+
+  containerEl.classList.add("card__container");
+  wrapperEl.classList.add("card__wrapper");
+  colorStripEl.classList.add("card__wrapper-colorstrip");
+  contentAreaEl.classList.add("card__wrapper-contentarea");
   titleEl.classList.add("card__contentarea-title", "truncation");
-  titleEl.innerHTML = note.title;
-
-  const contentEl = document.createElement("div");
   contentEl.classList.add("card__contentarea-content", "truncation");
-  contentEl.innerHTML = note.content;
+  timeStampEl.classList.add("card__contentarea-timestamp");
 
-  const timeStampEl = document.createElement("div");
-  timeStampEl.setAttribute("class", "card__contentarea-timestamp");
+  containerEl.dataset.id = note.id;
+  colorStripEl.style.backgroundColor = note.color;
+  titleEl.innerHTML = note.title;
+  contentEl.innerHTML = note.content;
   timeStampEl.innerHTML = note.timeStamp;
 
   containerEl.insertAdjacentElement("afterbegin", wrapperEl);
@@ -85,8 +91,8 @@ export const handleDeleteBtn = function (btn, active) {
 };
 
 export const deleteElement = function () {
-  const noteEl = document.querySelectorAll(".card__wrapper");
-  noteEl.forEach((el) => {
+  const wrapper = document.querySelectorAll(".card__wrapper");
+  wrapper.forEach((el) => {
     if (el.classList.contains("active")) {
       el.parentElement.remove();
     }
@@ -105,15 +111,13 @@ export const closeInputField = function () {
   }, 400);
 };
 
-export const changeBackgroundColor = function (card) {
-  const cards = document.querySelectorAll(".card__wrapper");
-  cards.forEach((cards) => cards.classList.remove("active"));
-
-  if (card) card.classList.add("active");
+export const changeBackgroundColor = function (note) {
+  wrapper.forEach((notes) => notes.classList.remove("active"));
+  if (note) note.classList.add("active");
 };
 
 export const fillInputs = function (note) {
-  document.querySelector("#input__title").value = note.title;
-  document.querySelector("#input__content").value = note.content;
-  document.querySelector("#input__color").value = note.color;
+  inputTitle.value = note.title;
+  inputContent.value = note.content;
+  inputColor.value = note.color;
 };

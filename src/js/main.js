@@ -23,9 +23,12 @@ const checkInput = function () {
   const inputValues = view.getInput();
   const { inputTitle, inputContent } = inputValues;
 
-  if (inputTitle === "") {
+  // The string is empty or consists only of spaces.
+  const pattern = /^\s*$/;
+
+  if (pattern.test(inputTitle)) {
     view.displayAlert("title");
-  } else if (inputContent === "") {
+  } else if (pattern.test(inputContent)) {
     view.displayAlert("content");
   } else {
     state.checked = true;
@@ -54,7 +57,6 @@ const createNote = function (inputData) {
     title: inputTitle,
     content: inputContent,
     color: inputColor,
-
     timeStamp: utils.createDate(),
     id: uuidv4(),
   };
@@ -166,6 +168,4 @@ document.querySelector("#cards").addEventListener("click", (e) => {
   safeToLocalStorage();
 });
 
-// To Do
-
-// inputArea border problem
+// inputvalidierung
