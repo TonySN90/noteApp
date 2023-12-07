@@ -6,10 +6,10 @@ import * as utils from "./utils.js";
 import * as config from "./config.js";
 import { v4 as uuidv4 } from "uuid";
 
-const openBtn = document.querySelector(".button__open");
-const storeBtn = document.querySelector(".button__store");
-const deleteBtn = document.querySelector(".button__delete");
-const backBtn = document.querySelector(".button__back");
+const openBtn = document.querySelector(".button--open");
+const storeBtn = document.querySelector(".button--store");
+const deleteBtn = document.querySelector(".button--delete");
+const backBtn = document.querySelector(".button--back");
 
 const state = {
   active: false,
